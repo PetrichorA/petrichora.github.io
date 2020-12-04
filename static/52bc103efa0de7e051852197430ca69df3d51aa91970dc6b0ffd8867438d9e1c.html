@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Configure Git to use a proxy</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/PetrichorA/page-648446cf@0.0.1/css/github-markdown.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/PetrichorA/page-648446cf@0.0.1/css/style.css">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/PetrichorA/page-648446cf@0.0.1/katex/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/gh/PetrichorA/page-648446cf@0.0.1/katex/katex.min.js"></script>
+
+    <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/PetrichorA/page-648446cf@0.0.1/highlightjs/styles/atom-one-light.min.css">
+    <script src="https://cdn.jsdelivr.net/gh/PetrichorA/page-648446cf@0.0.1/highlightjs/highlight.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/gh/PetrichorA/page-648446cf@0.0.1/js/main.js"></script>
+</head>
+
+<body>
+    <div class="markdown-body">
+        <header class="center">
+            Configure Git to use a proxy
+        </header>
+
+        <h1>Configure Git to use a proxy</h1>
+<h2>In Brief</h2>
+<p>You may need to configure a proxy server if you're having trouble cloning
+or fetching from a remote repository or getting an error
+like <code>unable to access '...' Couldn't resolve host '...'</code>.</p>
+<p>Consider something like:</p>
+<pre><code>git config --global http.proxy http://proxyUsername:proxyPassword@proxy.server.com:port
+</code></pre>
+<p>Or for a specific domain, something like:</p>
+<pre><code>git config --global http.https://domain.com.proxy http://proxyUsername:proxyPassword@proxy.server.com:port
+git config --global http.https://domain.com.sslVerify false
+</code></pre>
+<p>Setting <code>http.&lt;url&gt;.sslVerify</code> to <code>false</code> may help you quickly get going if your workplace
+employs man-in-the-middle HTTPS proxying. Longer term, you could get the
+root CA that they are applying to the certificate chain
+and specify it with either <code>http.sslCAInfo</code> or <code>http.sslCAPath</code>.</p>
+<p>See also the <a href="https://git-scm.com/docs/git-config">git-config</a> documentation, especially the following
+sections if you're having HTTPS/SSL issues</p>
+<ul>
+<li><code>http.sslVerify</code></li>
+<li><code>http.sslCAInfo</code></li>
+<li><code>http.sslCAPath</code></li>
+<li><code>http.sslCert</code></li>
+<li><code>http.sslKey</code></li>
+<li><code>http.sslCertPasswordProtected</code></li>
+</ul>
+<h2>In Detail</h2>
+<h3>Configure the proxy</h3>
+<p>You can configure these globally in your user <code>~/.gitconfig</code> file using the <code>--global</code> switch, or local to a repository in its <code>.git/config</code> file.</p>
+<h4>Setting a global proxy</h4>
+<p>Configure a global proxy if all access to all repos require this proxy</p>
+<pre><code>git config --global http.proxy http://proxyUsername:proxyPassword@proxy.server.com:port
+</code></pre>
+<h4>URL specific proxy</h4>
+<p>If you wish to specify that a proxy should be used for just
+some URLs that specify the URL as a git config subsection
+using <code>http.&lt;url&gt;.key</code> notation:</p>
+<pre><code>git config --global http.https://domain.com.proxy http://proxyUsername:proxyPassword@proxy.server.com:port
+</code></pre>
+<p>Which will result in the following in the <code>~/.gitconfig</code> file:</p>
+<pre><code>[http]
+[http &quot;https://domain.com&quot;]
+	proxy = http://proxyUsername:proxyPassword@proxy.server.com:port
+</code></pre>
+<h4>Handle subsequent SSL protocol errors</h4>
+<p>If you're still having trouble cloning or fetching and are now getting
+an <code>unable to access 'https://...': Unknown SSL protocol error in connection to ...:443</code> then
+you may decide to switch off SSL verification for the single operation
+by using the <code>-c http.sslVerify=false</code> option</p>
+<pre><code>git -c http.sslVerify=false clone https://domain.com/path/to/git
+</code></pre>
+<p>Once cloned, you may decide set this for just this cloned
+repository's <code>.git/config</code> by doing. Notice the absence of the <code>--global</code></p>
+<pre><code>git config http.sslVerify false
+</code></pre>
+<p>If you choose to make it global then limit it to a URL using
+the <code>http.&lt;url&gt;.sslVerify</code> notation:</p>
+<pre><code>git config --global http.https://domain.com.sslVerify false
+</code></pre>
+<p>Which will result in the following in the <code>~/.gitconfig</code> file:</p>
+<pre><code>[http]
+[http &quot;https://domain.com&quot;]
+	proxy = http://proxyUsername:proxyPassword@proxy.server.com:port
+	sslVerify = false
+</code></pre>
+<h3>Show current configuration</h3>
+<p>To show the current configuration of all <code>http</code> sections</p>
+<pre><code>git config --global --get-regexp http.*
+</code></pre>
+<p>If you are in a locally cloned repository folder then you drop
+the <code>--global</code> and see all current config:</p>
+<pre><code>git config --get-regexp http.*
+</code></pre>
+<h3>Unset a proxy or SSL verification</h3>
+<p>Use the <code>--unset</code> flag to remove configuration being specific about the
+property -- for example whether it was <code>http.proxy</code> or <code>http.&lt;url&gt;.proxy</code>.
+Consider using any of the following:</p>
+<pre><code>git config --global --unset http.proxy
+git config --global --unset http.https://domain.com.proxy
+
+git config --global --unset http.sslVerify
+git config --global --unset http.https://domain.com.sslVerify
+
+</code></pre>
+
+
+        <footer class="center">
+            <a href="https://github.com/MinecraftFuns">
+                <img style="width: 60px; height: 60px; border-radius: 60px;"
+                    src="https://cdn.jsdelivr.net/npm/arkjoe-about@latest/avatar.jpg">
+            </a>
+        </footer>
+    </div>
+</body>
+
+</html>
