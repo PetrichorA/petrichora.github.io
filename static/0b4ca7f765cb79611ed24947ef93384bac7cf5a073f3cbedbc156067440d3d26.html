@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>题解 P1072 【Hankson 的趣味题】</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/PetrichorA/page-648446cf@0.0.1/css/github-markdown.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/PetrichorA/page-648446cf@0.0.1/css/style.css">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/PetrichorA/page-648446cf@0.0.1/katex/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/gh/PetrichorA/page-648446cf@0.0.1/katex/katex.min.js"></script>
+
+    <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/PetrichorA/page-648446cf@0.0.1/highlightjs/styles/atom-one-light.min.css">
+    <script src="https://cdn.jsdelivr.net/gh/PetrichorA/page-648446cf@0.0.1/highlightjs/highlight.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/gh/PetrichorA/page-648446cf@0.0.1/js/main.js"></script>
+</head>
+
+<body>
+    <div class="markdown-body">
+        <header class="center">
+            题解 P1072 【Hankson 的趣味题】
+        </header>
+
+        <h1>题解 P1072 【Hankson 的趣味题】</h1>
+<p>一个整数可以分解为若干个质数的乘积，且这个分解是唯一的。</p>
+<p>根据这个定理，可以得到整数的另一个定义：一个整数是一个由若干个质数构成的可重集合。</p>
+<p>在只有乘除法的情况下，将整数的运算对应到集合的运算为：</p>
+<p>1 &lt;=&gt; ∅ ; gcd(a,b) &lt;=&gt; a∩b ; lcm(a,b) &lt;=&gt; a∪b ; a/b &lt;=&gt; a-b ; a*b &lt;=&gt; a+b ; a|b &lt;=&gt; a为b的子集 ; ...</p>
+<p>分析题目：</p>
+<p>gcd(x,a0)=a1,lcm(x,b0)=b1</p>
+<p>即x∩a0=a1,x∪b0=b1</p>
+<p>由此可知：</p>
+<p>1)a1为x的子集。</p>
+<p>2)b1-b0为x的子集。</p>
+<p>设k=a1∩(b1-b0) , a3=a1-k , b3=b1-b0-k</p>
+<p>这三个部分是已知的，即x必须包含的，统称之为“必选区域”，分别称a1为“必选区域A”，b1-b0为“必选区域B”，a3为“必选区域a3”，b3为“必选区域b3”。</p>
+<p>3)gcd(a0/a1,x)=1，即a0/a1是x除了必选区域A以外，不能包含的，称为不可选区域，设fbd=a0/a1。</p>
+<p>4)x为b1的子集=&gt;x-(b1-b0)为b0的子集，即x除了必选区域B外所拥有的元素只能从b0中选择，称之为“可选区域”。但这个可选区域还是初步的，可缩小范围的。</p>
+<p>到现在为止已经得到了足够多的信息，可以判断是否无解：如果必选区域b3与不可选区域有交集则无解；如果初步可选区域中不含必选区域a3则无解。</p>
+<p>现在根据之前的条件进一步缩小可选区域。最终会得到一个无约束的可选区域，x的所有可能性都由这个区域产生。</p>
+<p>1)这个初步范围仅考虑了必选区域B，因此应再排除必选区域A的内容，其中AB可能有交集，因此排除必选区域a3即可。</p>
+<pre><code class="language-cpp">2)lcm(x,b0)=b1 
+=&gt; gcd(b0/gcd(x,b0) , x/gcd(x,b0))=1
+=&gt; gcd(b0/gcd(x,b0) , b1/b0)=1 (∵b1/b0 | x/gcd(x,b0))
+gcd(x,b0)即为b0中所有与b1/b0拥有的元素相同的部分，也就是要排除的部分。
+</code></pre>
+<p>若这个部分与不可选区域有交集，则无解。
+3)最后再从剩下的可选区域中排除不可选区域。</p>
+<p>经过这3步，剩下来的可选区域为最终的自由选择区域，x的所有解的个数即这个区域的子集数目。但因为是可重集合，子集数目比较难求，又因为两个定义是等价的，子集数即整数的因数个数，所以我们转而求最终区域的因数个数。</p>
+<p>只需要将它质因数分解：p1q1p2q2p3q3...pkqk</p>
+<p>它的因子数目即(q1+1)(q2+1)(q3+1)...(qk+1)</p>
+<p>我的参考代码如下，请参照题解阅读：</p>
+<pre><code class="language-cpp">#include &lt;stdio.h&gt;
+int su[5000] = {4, 2, 3, 5, 7}; //素数表
+inline int gcd(int a, int b)
+{
+    for (int c; c = a % b; a = b, b = c)
+        ;
+    return b;
+} //最大公约数
+int main()
+{
+    for (int i = 11; i &lt; 45000; i++) //打素数表
+
+    {
+
+        int j;
+
+        for (j = 1; j &lt;= su[0] &amp;&amp; su[j] * su[j] &lt;= i &amp;&amp; i % su[j]; j++)
+            ;
+
+        if (su[j] * su[j] &gt; i || j &gt; su[0])
+            su[++su[0]] = i;
+    }
+
+    int n;
+
+    for (scanf(&quot;%d&quot;, &amp;n); n &gt; 0; n--)
+
+    {
+
+        int a0, a1, b0, b1;
+
+        scanf(&quot;%d %d %d %d&quot;, &amp;a0, &amp;a1, &amp;b0, &amp;b1);
+
+        int k = gcd(b1 / b0, a1); //必选区域A,B的交集
+
+        int a3 = a1 / k, b3 = b1 / b0 / k, fbd = a0 / a1;
+
+        if (gcd(b3, fbd) &gt; 1 || b0 % a3 != 0)
+            printf(&quot;0\n&quot;); //如果必选区域b3与禁止选的区域有交集则无解，如果可选区域中没有必选区域a3也无解
+        else
+
+        {
+
+            int t = b0 / a3; //1)排除a3
+
+            if (gcd(fbd, gcd(t, k)) &gt; 1)
+                printf(&quot;0\n&quot;); //如果可选区域中残留的必选区域和禁止选的区域有交集则无解。因为b3与fbd必无交集，此处不需考虑
+
+            else
+
+            {
+
+                int ans = 1;
+
+                for (int c; (c = gcd(t, b3\* k)) &gt; 1; t /= c)
+                    ; //2)从可选区域中排除残余必选区域
+
+                for (int c; (c = gcd(t, fbd)) &gt; 1; t /= c)
+                    ; //3)从可选区域中排除禁止区域
+
+                for (int i = 1, j; i &lt;= su[0] &amp;&amp; su[i] &lt;= t; ans\*= j, i++) //对可选区域分解质因数，并计算因子数目
+
+                    for (j = 1; t % su[i] == 0; j++, t /= su[i])
+                        ;
+
+                printf(&quot;%d\n&quot;, ans &lt;&lt; (t &gt; 1)); //如果最后t不为1，说明含有一个大素数
+            }
+        }
+    }
+
+    return 0;
+}
+</code></pre>
+<!-- Identity: solution-p1072 -->
+<!-- Category: 题解 -->
+<!-- Publish: 2017-05-05 20:08:05 -->
+
+
+        <footer class="center">
+            <a href="https://github.com/MinecraftFuns">
+                <img style="width: 60px; height: 60px; border-radius: 60px;"
+                    src="https://cdn.jsdelivr.net/npm/arkjoe-about@latest/avatar.jpg">
+            </a>
+        </footer>
+    </div>
+</body>
+
+</html>

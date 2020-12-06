@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Paste from X1234567 at Sun, 29 Oct 2017 01:20:30 +0000</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/PetrichorA/page-648446cf@0.0.1/css/github-markdown.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/PetrichorA/page-648446cf@0.0.1/css/style.css">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/PetrichorA/page-648446cf@0.0.1/katex/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/gh/PetrichorA/page-648446cf@0.0.1/katex/katex.min.js"></script>
+
+    <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/PetrichorA/page-648446cf@0.0.1/highlightjs/styles/atom-one-light.min.css">
+    <script src="https://cdn.jsdelivr.net/gh/PetrichorA/page-648446cf@0.0.1/highlightjs/highlight.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/gh/PetrichorA/page-648446cf@0.0.1/js/main.js"></script>
+</head>
+
+<body>
+    <div class="markdown-body">
+        <header class="center">
+            Paste from X1234567 at Sun, 29 Oct 2017 01:20:30 +0000
+        </header>
+
+        <h1>Paste from X1234567 at Sun, 29 Oct 2017 01:20:30 +0000</h1>
+<pre><code class="language-cpp">#include &lt;bits/stdc++.h&gt;
+#include &lt;windows.h&gt;
+#define KEY_DOWN(VK_NONAME) ((GetAsyncKeyState(VK_NONAME) &amp; 0x8000) ? 1 : 0)
+/*
+#define R  SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),FOREGROUND_RED)
+#define Ob  Rb
+#define Rb  SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),BACKGROUND_RED|BACKGROUND_INTENSITY)
+#define W  SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),FOREGROUND_RED|FOREGROUND_BLUE|FOREGROUND_GREEN)
+#define Wb  SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),BACKGROUND_RED|BACKGROUND_BLUE|BACKGROUND_GREEN|BACKGROUND_INTENSITY)
+#define Wb2  SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),BACKGROUND_RED|BACKGROUND_BLUE|BACKGROUND_GREEN)
+#define B  SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),FOREGROUND_BLUE|FOREGROUND_INTENSITY)
+#define Bb  SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),BACKGROUND_BLUE|FOREGROUND_RED|FOREGROUND_GREEN)
+#define G  SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),FOREGROUND_GREEN)
+#define Gb  SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),BACKGROUND_GREEN|BACKGROUND_INTENSITY)
+#define Y  SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),FOREGROUND_RED|FOREGROUND_GREEN)
+#define Yb  SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),BACKGROUND_RED|BACKGROUND_GREEN|BACKGROUND_INTENSITY)
+#define S  SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),FOREGROUND_GREEN|FOREGROUND_BLUE)
+#define Sb  SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),BACKGROUND_GREEN|BACKGROUND_BLUE|BACKGROUND_INTENSITY)
+#define P  SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),FOREGROUND_BLUE|FOREGROUND_RED)
+#define Pb  SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),BACKGROUND_BLUE|BACKGROUND_RED|BACKGROUND_INTENSITY)
+*/
+#define br BACKGROUND_RED
+#define bg BACKGROUND_GREEN
+#define bb BACKGROUND_BLUE
+#define bi BACKGROUND_INTENSITY
+#define fr FOREGROUND_RED
+#define fg FOREGROUND_GREEN
+#define fb FOREGROUND_BLUE
+#define fi FOREGROUND_INTENSITY
+
+using namespace std;
+int dx = 1, dy = 1;
+int a[101][101];
+int score = 0;
+void col(int co)
+{
+    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), co);
+}
+void gotoxy(int x, int y)
+{
+    COORD pos = {x, y};
+    HANDLE hOut = GetStdHandle(STD_OUTPUT_HANDLE);
+    SetConsoleCursorPosition(hOut, pos);
+}
+void HideCursor()
+{
+    CONSOLE_CURSOR_INFO cursor_info = {1, 0};
+    SetConsoleCursorInfo(GetStdHandle(STD_OUTPUT_HANDLE), &amp;cursor_info);
+}
+bool check(char c)
+{
+    return KEY_DOWN(c);
+}
+void prin(int num, bool choice)
+{
+    col(fr + fg + fb);
+    switch (num)
+    {
+    case 0:
+    {
+        col(fr + fg + fb);
+        break;
+    }
+    case 1:
+    {
+        col(br + bi);
+        break;
+    }
+    case 2:
+    {
+        col(bg + bi);
+        break;
+    }
+    case 3:
+    {
+        col(bb + bi);
+        break;
+    }
+    }
+    if (choice)
+        cout &lt;&lt; &quot;**&quot;;
+    else
+        cout &lt;&lt; &quot;  &quot;;
+}
+bool dfs_map[101][101];
+#define n 10
+int dfs(int x, int y, int color)
+{
+    if (color == 0)
+        return 0;
+    if (x &lt; 1 || x &gt; n || y &lt; 1 || y &gt; n)
+        return 0;
+    if (dfs_map[x][y])
+        return 0;
+    if (a[x][y] != 0 &amp;&amp; a[x][y] != color)
+        return 0;
+    dfs_map[x][y] = 1;
+    if (a[x][y] == 0)
+        return dfs(x - 1, y, color) + dfs(x + 1, y, color) + dfs(x, y + 1, color) + dfs(x, y - 1, color);
+    else
+    {
+        a[x][y] = 0;
+        return 1 + dfs(x - 1, y, color) + dfs(x + 1, y, color) + dfs(x, y + 1, color) + dfs(x, y - 1, color);
+    }
+}
+bool wron()
+{
+    for (int i = 1; i &lt;= n; i++)
+        for (int j = 1; j &lt;= n; j++)
+            if (a[i][j] != 0)
+                return 1;
+    return 0;
+}
+int main()
+{
+    HideCursor();
+    srand((unsigned)time(NULL));
+    for (int i = 1; i &lt;= n; i++)
+    {
+        for (int j = 1; j &lt;= n; j++)
+            a[i][j] = rand() % 3 + 1, prin(a[i][j], 0); //cout&lt;&lt;a[i][j];
+        col(0), cout &lt;&lt; endl;
+    }
+    while (wron())
+    {
+        int tmp = 0;
+        memset(dfs_map, 0, sizeof(dfs_map));
+        gotoxy(0, 0);
+        for (int i = 1; i &lt;= n; i++)
+        {
+            for (int j = 1; j &lt;= n; j++)
+                if (i != dx || j != dy)
+                    prin(a[i][j], 0); //cout&lt;&lt;a[i][j];
+                else
+                    prin(a[i][j], 1);
+            col(0), cout &lt;&lt; endl;
+        }
+        gotoxy(30, 0);
+        col(fr + fg + fb), cout &lt;&lt; &quot;dx:&quot; &lt;&lt; dx &lt;&lt; &quot; dy:&quot; &lt;&lt; dy &lt;&lt; &quot; score:&quot; &lt;&lt; score &lt;&lt; &quot;         &quot;;
+        Sleep(50);
+        if (check(VK_UP))
+            dx = max(dx - 1, 1);
+        if (check(VK_LEFT))
+            dy = max(dy - 1, 1);
+        if (check(VK_DOWN))
+            dx = min(dx + 1, n);
+        if (check(VK_RIGHT))
+            dy = min(dy + 1, n);
+        if (check(VK_RETURN))
+            tmp = dfs(dx, dy, a[dx][dy]), score += tmp * (tmp + 1);
+    }
+    gotoxy(30, 0);
+    col(fr + fg + fb), cout &lt;&lt; &quot;                                                                  &quot;;
+    gotoxy(10, 10);
+    cout &lt;&lt; &quot;score:&quot; &lt;&lt; score;
+    Sleep(10000);
+}
+</code></pre>
+<p><a href="https://paste.ubuntu.com/25841126/" title="UPb">UPb</a></p>
+<!-- Identity: fGh0dHA6Ly90LmNuL1JUV2JqU3J8 -->
+<!-- Category: Ubuntu Pastebin -->
+<!-- Publish: 2017-12-17 13:14:38 -->
+
+
+        <footer class="center">
+            <a href="https://github.com/MinecraftFuns">
+                <img style="width: 60px; height: 60px; border-radius: 60px;"
+                    src="https://cdn.jsdelivr.net/npm/arkjoe-about@latest/avatar.jpg">
+            </a>
+        </footer>
+    </div>
+</body>
+
+</html>

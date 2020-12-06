@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>题解 P3817 【小A的糖果】</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/PetrichorA/page-648446cf@0.0.1/css/github-markdown.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/PetrichorA/page-648446cf@0.0.1/css/style.css">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/PetrichorA/page-648446cf@0.0.1/katex/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/gh/PetrichorA/page-648446cf@0.0.1/katex/katex.min.js"></script>
+
+    <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/PetrichorA/page-648446cf@0.0.1/highlightjs/styles/atom-one-light.min.css">
+    <script src="https://cdn.jsdelivr.net/gh/PetrichorA/page-648446cf@0.0.1/highlightjs/highlight.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/gh/PetrichorA/page-648446cf@0.0.1/js/main.js"></script>
+</head>
+
+<body>
+    <div class="markdown-body">
+        <header class="center">
+            题解 P3817 【小A的糖果】
+        </header>
+
+        <h1>题解 P3817 【小A的糖果】</h1>
+<h1>这道题真的有点水</h1>
+<pre><code class="language-cpp">program LuoguP3817(input,output);
+var
+ n,x:int64;  //开int64，不然会炸点
+ a:array of int64;  //pascal动态数组，节省内存，~不为人知的小秘密
+ i:longint;
+ count:int64; //用以计数
+begin
+ count:=0;
+ readln(n,x);
+ setlength(a,n+1); //设置动态数组的长度(保留一个冗余)
+ for i:=1 to n do read(a[i]);
+ for i:=2 to n do
+ begin
+  if a[i-1]+a[i]&gt;x then
+  begin
+   count:=count+(a[i-1]+a[i]-x); //如果两个连续的糖果数之和超限，则在count计数中加入(a[i-1]+a[i]-x)个糖果
+   a[i]:=x-a[i-1];    //对第二堆糖果数进行处理，使得它&quot;真的被吃了&quot; （呵呵）
+  end;
+ end;
+ writeln(count);
+end.        //AC成功
+这道题并没有什么重点难点，Accept还是很容易的.
+</code></pre>
+<!-- Identity: solution-p3817 -->
+<!-- Category: 题解 -->
+<!-- Publish: 2017-07-13 18:46:55 -->
+
+
+        <footer class="center">
+            <a href="https://github.com/MinecraftFuns">
+                <img style="width: 60px; height: 60px; border-radius: 60px;"
+                    src="https://cdn.jsdelivr.net/npm/arkjoe-about@latest/avatar.jpg">
+            </a>
+        </footer>
+    </div>
+</body>
+
+</html>
