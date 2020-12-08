@@ -1,0 +1,82 @@
+<!DOCTYPE html><html><head><meta charset=utf-8><title>题解 CF1110F 【Nearest Leaf】 - Siyuan 的博客 - 洛谷博客</title><meta http-equiv=X-UA-Compatible content="IE=edge,chrome=1"><meta name=viewport content="width=device-width, initial-scale=1.0, maximum-scale=1.0"><meta name=blog-uid content=49725><meta name=blog-name content="Siyuan 的博客"><meta name=current-user content=-1><link rel=stylesheet href=https://cdn.jsdelivr.net/gh/urlib/bin_9@2e21c55745ef45f2337a15661a7056705d1ec3d3/24/37/8f/8c/24378f8cc01373c5697b69805767add20566e05f679250f0d4c75521d0ef7f3e.css><link rel=stylesheet href=https://cdn.jsdelivr.net/gh/urlib/bin_9@af3f69f169099d2489ff59c29f6f132f939e5884/f7/56/da/fc/f756dafcc222c530dc90f491f25fec845e7a8da4d9b32bcf68d933089573b91e.css><link rel=stylesheet href=https://cdn.jsdelivr.net/gh/PetrichorA/page-648446cf@0.0.1/katex/katex.min.css><script defer src=https://cdn.jsdelivr.net/gh/PetrichorA/page-648446cf@0.0.1/katex/katex.min.js></script><script defer src=https://cdn.jsdelivr.net/gh/PetrichorA/page-648446cf@0.0.1/katex/contrib/auto-render.min.js onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}]});"></script><link rel=stylesheet href=https://cdn.jsdelivr.net/gh/PetrichorA/page-648446cf@0.0.1/highlightjs/styles/atom-one-light.min.css><script async src=https://cdn.jsdelivr.net/gh/PetrichorA/page-648446cf@0.0.1/highlightjs/highlight.min.js onload="const o=document.querySelectorAll('pre code');for(const c of o)hljs.highlightBlock(c);"></script><link rel=stylesheet href=https://cdn.jsdelivr.net/gh/urlib/bin_9@53a6bb81b7409c63f40f6ad1a0577e1b5ef2912b/b7/85/ad/7f/b785ad7f60728a797569fa1c49001e04f5dc48d00cf09936486c4af9b34ab1f4.css></head><body> <nav class="bread-navbar navbar-default navbar-custom navbar-fixed-top"> <div class=container-fluid> <div class="navbar-header page-scroll"> <button class="btn navbar-toggle" type=button style=float:right;> <span class=sr-only>Toggle navigation</span> <span class=icon-bar></span> <span class=icon-bar></span> <span class=icon-bar></span> </button> <a class=navbar-brand href=.>Siyuan 的博客</a> </div> <div id=bread-navbar> <div class=navbar-collapse> <ul class="nav navbar-nav bread-navbar-nav navbar-right"> <li class=nav-item> <a href=.>文章</a> </li> </ul> </div> </div> </div> </nav> <header class="footer bread-height-extended intro-header"> <div class=container style="padding-top: 100px;"> <div class=row> <div class=col> <div class=site-heading> <h1 id=bread-blog-title style="font-style: normal;text-align: left;">题解 CF1110F 【Nearest Leaf】 </h1> <div class=bread-blog-meta style="text-align: left;">10 likes, on 2019-02-08 21:36:04, in <a class=tag style=color:#fff; href=".#type=题解">题解</a></div> </div> </div> </div> </div> </header> <div class=container id=blog-container style="margin-top: 30px;" data-blogid=110075 data-vote=0 data-thumbup=10> <div class=row> <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container"> <div id=article-content style="margin-top: 30px; margin-bottom: 30px;"> <p><a href=https://hydingsy.github.io/articles/problem-Codeforces-1110F-Nearest-Leaf/ > $$\Large\texttt{My Blog}$$</a></p> <hr> <h2>Description</h2> <blockquote> <p>题目链接：<a href=https://codeforces.com/contest/1110/problem/F>Codeforces 1110F</a></p> </blockquote> <p>给你一棵带权有根树，根节点为 $1$，且保证每个点的父亲 $p_i&lt;i$，其中 $(p_i,i)$ 的边权为 $w_i$。这棵树有个性质：如果我们 $\text{DFS}$ 这棵树，对于每个点都递增枚举儿子节点，每访问到一个节点就记录其编号，那么得到的序列刚好为 $1$ 到 $n$。</p> <p>现在有 $q$ 次询问，每次给出 $v_i,l_i,r_i$，求从 $v_i$ 出发到 $[l_i,r_i]$ 中的其中一个叶子节点的最短距离（保证 $[l_i,r_i]$ 中至少有一个叶子节点）。 </p> <p>数据范围： $3\le n\le 5\times 10^5$， $1\le q\le 5\times 10^5$， $1\le p_i&lt;i$， $1\le w_i\le 10^9$</p> <hr> <h2>Solution</h2> <p>考虑都没有修改操作，我们可以把询问<strong>离线</strong>下来。按照询问的节点分类。</p> <p>我们首先观察一个性质：由于 $\text{DFS}$ 序就是 $1$ 到 $n$，那么意味着<strong>每棵子树内</strong>的编号都是<strong>连续</strong>的，记子树 $i$ 内点的<strong>最大编号</strong>为 $k_i$。</p> <p>我们再考虑一个问题：如果从 $u$ 到达 $v$（我们记这条边为 $(u,v,w)$），其中 $v$ 的深度大于 $u$，那么到达每个叶子的路径长度会发生什么变化？</p> <ul> <li>对于在 $v$ 子树内的叶子，到他们的距离<strong>减少</strong> $w$。</li> <li>其余叶子节点，到他们的距离<strong>增加</strong> $w$。</li> </ul> <p>根据之前的性质，我们发现 $v$ 子树内的节点编号连续，可以直接用<strong>线段树修改</strong>。具体的修改方法为：我们将线段树内 $[1,n]$ 的节点的值增加 $w$，将 $[v,k_v]$ 的节点的值减少 $2w$。</p> <p>为了防止对线段树中<strong>非叶子节点</strong>的影响，我们应该要将他们的值初始化为 $\text{INF}$，使得无论如何修改都不会影响答案。</p> <p>这样一来，我们可以得到一个简单的算法流程：</p> <ol> <li>将 $1$ 到所有叶子节点的距离放到线段树中，非叶子节点的距离定义为 $\text{INF}$。</li> <li>直接 $\text{DFS}$ 整棵树，将询问节点为<strong>当前节点</strong>的询问统计答案。</li> <li>枚举当前节点 $u$ 的儿子节点 $v$，在线段树上修改 $[v,k_v]$ 的值并递归求解 $v$ 的值；递归后记得<strong>回溯</strong>消去影响！</li> </ol> <p><strong>时间复杂度</strong>： $O((n+q)\log n)$</p> <hr> <h2>Code</h2> <pre><code class=language-cpp>#include &lt;cstdio&gt;
+#include &lt;algorithm&gt;
+#include &lt;vector&gt;
+#define lson p&lt;&lt;1
+#define rson p&lt;&lt;1|1
+
+const int N=5e5+5;
+const long long INF=1LL&lt;&lt;60;
+int n,m,tot,l[N],r[N],mx[N],lnk[N],ter[N],nxt[N],val[N];
+long long seg[N&lt;&lt;2],tag[N&lt;&lt;2],dis[N],ans[N];
+std::vector&lt;int&gt; q[N];
+
+void pushup(int p) {
+    seg[p]=std::min(seg[lson],seg[rson]);
+}
+void pushdown(int p) {
+    if(!tag[p]) return;
+    long long v=tag[p];
+    seg[lson]+=v,tag[lson]+=v,seg[rson]+=v,tag[rson]+=v,tag[p]=0;
+}
+void modify(int x,int y,int p,int l,int r,long long v) {
+    if(x&lt;=l&amp;&amp;r&lt;=y) {
+        seg[p]+=v,tag[p]+=v;
+        return;
+    }
+    pushdown(p);
+    int mid=(l+r)&gt;&gt;1;
+    if(x&lt;=mid) modify(x,y,lson,l,mid,v);
+    if(mid&lt;y) modify(x,y,rson,mid+1,r,v);
+    pushup(p);
+}
+long long query(int x,int y,int p,int l,int r) {
+    if(x&lt;=l&amp;&amp;r&lt;=y) return seg[p];
+    pushdown(p);
+    int mid=(l+r)&gt;&gt;1;
+    long long ans=INF;
+    if(x&lt;=mid) ans=std::min(ans,query(x,y,lson,l,mid));
+    if(mid&lt;y) ans=std::min(ans,query(x,y,rson,mid+1,r));
+    return ans;
+}
+void add(int u,int v,int w) {
+    ter[++tot]=v,nxt[tot]=lnk[u],lnk[u]=tot,val[tot]=w;
+}
+void dfs1(int u) {
+    mx[u]=u;
+    for(int i=lnk[u];i;i=nxt[i]) {
+        int v=ter[i];
+        dis[v]=dis[u]+val[i];
+        dfs1(v);
+        mx[u]=std::max(mx[u],mx[v]);
+    }
+}
+void dfs2(int u) {
+    for(int i:q[u]) ans[i]=query(l[i],r[i],1,1,n);
+    for(int i=lnk[u];i;i=nxt[i]) {
+        int v=ter[i],w=val[i];
+        modify(1,n,1,1,n,w),modify(v,mx[v],1,1,n,-w-w);
+        dfs2(v);
+        modify(1,n,1,1,n,-w),modify(v,mx[v],1,1,n,w+w);
+    }
+}
+int main() {
+    scanf("%d%d",&amp;n,&amp;m);
+    for(int i=2;i&lt;=n;++i) {
+        int p,w;
+        scanf("%d%d",&amp;p,&amp;w),add(p,i,w);
+    }
+    dfs1(1);
+    for(int i=1;i&lt;=n;++i) {
+        modify(i,i,1,1,n,i==mx[i]?dis[i]:INF);
+    }
+    for(int i=1;i&lt;=m;++i) {
+        int v;
+        scanf("%d%d%d",&amp;v,&amp;l[i],&amp;r[i]),q[v].push_back(i);
+    }
+    dfs2(1);
+    for(int i=1;i&lt;=m;++i) printf("%lld\n",ans[i]);
+    return 0;
+}</code></pre> </div> </div> </div> </div> <footer class=bread-footer> <div class=container> <div class=row> <div class=col> <ul class="list-inline text-center" style="margin-bottom: 10px"> <li> <a target=_blank href=https://www.luogu.com.cn> <span class="fa-stack fa-lg"> <i class="fa fa-circle fa-stack-2x"></i> <i class="fa  fa-stack-1x fa-inverse">洛</i> </span> </a> </li> <li> <a target=_blank href=https://github.com/luogu-dev/luogu-blog-frontend> <span class="fa-stack fa-lg"> <i class="fa fa-circle fa-stack-2x"></i> <i class="fa fa-github fa-stack-1x fa-inverse"></i> </span> </a> </li> </ul> <p class="copyright text-muted"> <a class=item href=_sitemap>Site Map </a> <br> Powered by Luogu Blog. Theme by <a href=https://github.com/Himself65>Himself65</a>. All rights reserved. <br> </p> </div> </div> </div> </footer></body></html>
