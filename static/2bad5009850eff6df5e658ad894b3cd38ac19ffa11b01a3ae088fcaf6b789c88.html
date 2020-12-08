@@ -1,0 +1,46 @@
+<!DOCTYPE html><html><head><meta charset=utf-8><title>题解 P7113 【排水系统（洛谷民间数据）】 - Siyuan 的博客 - 洛谷博客</title><meta http-equiv=X-UA-Compatible content="IE=edge,chrome=1"><meta name=viewport content="width=device-width, initial-scale=1.0, maximum-scale=1.0"><meta name=blog-uid content=49725><meta name=blog-name content="Siyuan 的博客"><meta name=current-user content=-1><link rel=stylesheet href=https://cdn.jsdelivr.net/gh/urlib/bin_9@2e21c55745ef45f2337a15661a7056705d1ec3d3/24/37/8f/8c/24378f8cc01373c5697b69805767add20566e05f679250f0d4c75521d0ef7f3e.css><style>#article-content img{width:auto;height:auto;max-width:100%;max-height:100%}</style><link rel=stylesheet href=https://cdn.jsdelivr.net/gh/PetrichorA/page-648446cf@0.0.1/katex/katex.min.css><script defer src=https://cdn.jsdelivr.net/gh/PetrichorA/page-648446cf@0.0.1/katex/katex.min.js></script><link rel=stylesheet href=https://cdn.jsdelivr.net/gh/PetrichorA/page-648446cf@0.0.1/highlightjs/styles/atom-one-light.min.css><script src=https://cdn.jsdelivr.net/gh/PetrichorA/page-648446cf@0.0.1/highlightjs/highlight.min.js></script><script src=https://cdn.jsdelivr.net/gh/PetrichorA/page-648446cf@0.0.1/js/main.js></script></head><body> <nav class="bread-navbar navbar-default navbar-custom navbar-fixed-top"> <div class=container-fluid> <div class="navbar-header page-scroll"> <button class="btn navbar-toggle" type=button style=float:right;> <span class=sr-only>Toggle navigation</span> <span class=icon-bar></span> <span class=icon-bar></span> <span class=icon-bar></span> </button> <a class=navbar-brand href=.>Siyuan 的博客</a> </div> <div id=bread-navbar> <div class=navbar-collapse> <ul class="nav navbar-nav bread-navbar-nav navbar-right"> <li class=nav-item> <a href=.>文章</a> </li> </ul> </div> </div> </div> </nav> <style>.intro-header{background-image:url(https://cdn.jsdelivr.net/gh/urlib/img_1@f6dd886e4b9589683d248071473ae8ed73300b01/39/7e/af/0c/397eaf0ccad8b3eb71b9543f652c6a7b86f27f96e57b6023c95e4b94afe535be.png);background-size:cover}header.intro-header .site-heading{text-shadow:2px 2px 4px #000}</style> <header class="footer bread-height-extended intro-header main-head"> <div class=container style="padding-top: 100px;"> <div class=row> <div class=col> <div class=site-heading> <h1 id=bread-blog-title style="font-style: normal;">Siyuan 的博客</h1> <div id=bread-blog-subtitle class=subheading>Dream OIer.</div> </div> </div> </div> </div> </header> <style>.main-head{visibility:hidden;display:none}pre{background-color:#f8f8f8;border:1px solid #ccc;padding:6px 10px;border-radius:3px}</style> <header class="footer bread-height-extended intro-header"> <div class=container style="padding-top: 100px;"> <div class=row> <div class=col> <div class=site-heading> <h1 id=bread-blog-title style="font-style: normal;text-align: left;">题解 P7113 【排水系统（洛谷民间数据）】 </h1> <div class=bread-blog-meta style="text-align: left;">3 likes, on 2020-12-07 20:51:13, in <a class=tag style=color:#fff; href=".#type=题解">题解</a></div> </div> </div> </div> </div> </header> <div class=container id=blog-container style="margin-top: 30px;" data-blogid=296310 data-vote=0 data-thumbup=3> <div class=row> <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container"> <div id=article-content style="margin-top: 30px; margin-bottom: 30px;"> <p>这题的做法大家已经讲的很详细了我也没啥好讲的 qaq</p> <p>比较无聊写了一份 Python 水了一发，供诸君笑谈。</p> <pre><code class=language-python>def gcd(x, y):
+    if y == 0:
+        return x
+    else:
+        return gcd(y, x % y)
+
+def add(v, u):
+    _g = g[v] * g[u] * oud[u]
+    _f = f[u] * (_g // (g[u] * oud[u])) + f[v] * (_g // g[v])
+    d = gcd(_f, _g)
+    f[v] = _f // d
+    g[v] = _g // d
+
+def toposort():
+    q = []
+    for i in range(m):
+        q.append(i)
+        f[i] = 1
+    for u in q:
+        for v in E[u]:
+            ind[v] = ind[v] - 1
+            add(v, u)
+            if ind[v] == 0:
+                q.append(v)
+
+[n, m] = map(lambda x: int(x), input().split(' '))
+E = [[] for i in range(n)]
+oud = [0] * n
+ind = [0] * n
+f = [0] * n
+g = [1] * n
+for i in range(n):
+    a = list(map(lambda x: int(x), input().split(' ')))
+    oud[i] = a[0]
+    a = a[1:]
+    for v in a:
+        v = v - 1
+        E[i].append(v)
+        ind[v] = ind[v] + 1
+toposort()
+for i in range(n):
+    if oud[i] == 0:
+        print(f[i], g[i])</code></pre> </div> <hr> <div id=article-vote></div> <hr> <div id=article-comments></div> </div> </div> </div> <footer class=bread-footer> <div class=container> <div class=row> <div class=col> <ul class="list-inline text-center" style="margin-bottom: 10px"> <li> <a target=_blank href=https://www.luogu.com.cn> <span class="fa-stack fa-lg"> <i class="fa fa-circle fa-stack-2x"></i> <i class="fa  fa-stack-1x fa-inverse">洛</i> </span> </a> </li> <li> <a target=_blank href=https://github.com/luogu-dev/luogu-blog-frontend> <span class="fa-stack fa-lg"> <i class="fa fa-circle fa-stack-2x"></i> <i class="fa fa-github fa-stack-1x fa-inverse"></i> </span> </a> </li> </ul> <p class="copyright text-muted"> <a class=item href=_sitemap>Site Map </a> <br> Powered by Luogu Blog. Theme by <a href=https://github.com/Himself65>Himself65</a>. All rights reserved. <br> </p> </div> </div> </div> </footer></body></html>
