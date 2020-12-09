@@ -1,0 +1,279 @@
+<!DOCTYPE html
+    PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns=http://www.w3.org/1999/xhtml xml:lang=en lang=en><head><meta http-equiv=Content-Type content="text/html;charset=utf-8"><link rel=stylesheet type=text/css charset=utf-8 media=screen href=https://cdn.jsdelivr.net/gh/urlib/bin_9@29ec92e10ef383dcb9385531e77d8afa0ee5af28/64/8a/28/38/648a28383c206eb0902cc0fb74d17002356f589d42af05d50b270b9f6795a84b.css><title>Ubuntu Pastebin</title></head><body> <div id=outerColumnContainer style="color: #000"> <div id=contentColumn> <div class=inside> <h1 id=title>Ubuntu Pastebin</h1> <h1>Paste from X1234567 at Sun, 29 Oct 2017 01:20:30 +0000</h1> <div class=paste> <a href=https://paste.ubuntu.com/25841126/plain/ class=pturl>Download as text</a> <div class=paste> <table class=pastetable> <tr> <td class=linenos> <div class=linenodiv> <pre>  1
+  2
+  3
+  4
+  5
+  6
+  7
+  8
+  9
+<span class=special> 10</span>
+ 11
+ 12
+ 13
+ 14
+ 15
+ 16
+ 17
+ 18
+ 19
+<span class=special> 20</span>
+ 21
+ 22
+ 23
+ 24
+ 25
+ 26
+ 27
+ 28
+ 29
+<span class=special> 30</span>
+ 31
+ 32
+ 33
+ 34
+ 35
+ 36
+ 37
+ 38
+ 39
+<span class=special> 40</span>
+ 41
+ 42
+ 43
+ 44
+ 45
+ 46
+ 47
+ 48
+ 49
+<span class=special> 50</span>
+ 51
+ 52
+ 53
+ 54
+ 55
+ 56
+ 57
+ 58
+ 59
+<span class=special> 60</span>
+ 61
+ 62
+ 63
+ 64
+ 65
+ 66
+ 67
+ 68
+ 69
+<span class=special> 70</span>
+ 71
+ 72
+ 73
+ 74
+ 75
+ 76
+ 77
+ 78
+ 79
+<span class=special> 80</span>
+ 81
+ 82
+ 83
+ 84
+ 85
+ 86
+ 87
+ 88
+ 89
+<span class=special> 90</span>
+ 91
+ 92
+ 93
+ 94
+ 95
+ 96
+ 97
+ 98
+ 99
+<span class=special>100</span>
+101
+102
+103
+104
+105
+106
+107
+108
+109
+<span class=special>110</span>
+111
+112
+113
+114
+115
+116
+117
+118
+119
+<span class=special>120</span>
+121
+122
+123
+124
+125
+126
+127
+128
+129
+<span class=special>130</span>
+131
+132
+133
+134
+135
+136
+137
+138
+139</pre> </div> </td> <td class=code> <div class=paste> <pre><span></span><span class=cp>#include</span> <span class=cpf>&lt;bits/stdc++.h&gt;</span><span class=cp></span>
+<span class=cp>#include</span> <span class=cpf>&lt;windows.h&gt;</span><span class=cp></span>
+<span class=cp>#define KEY_DOWN(VK_NONAME) ((GetAsyncKeyState(VK_NONAME) &amp; 0x8000) ? 1:0)</span>
+<span class=cm>/*</span>
+<span class=cm>#define R  SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),FOREGROUND_RED)</span>
+<span class=cm>#define Ob  Rb</span>
+<span class=cm>#define Rb  SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),BACKGROUND_RED|BACKGROUND_INTENSITY)</span>
+<span class=cm>#define W  SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),FOREGROUND_RED|FOREGROUND_BLUE|FOREGROUND_GREEN)</span>
+<span class=cm>#define Wb  SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),BACKGROUND_RED|BACKGROUND_BLUE|BACKGROUND_GREEN|BACKGROUND_INTENSITY)</span>
+<span class=cm>#define Wb2  SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),BACKGROUND_RED|BACKGROUND_BLUE|BACKGROUND_GREEN)</span>
+<span class=cm>#define B  SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),FOREGROUND_BLUE|FOREGROUND_INTENSITY)</span>
+<span class=cm>#define Bb  SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),BACKGROUND_BLUE|FOREGROUND_RED|FOREGROUND_GREEN)</span>
+<span class=cm>#define G  SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),FOREGROUND_GREEN)</span>
+<span class=cm>#define Gb  SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),BACKGROUND_GREEN|BACKGROUND_INTENSITY)</span>
+<span class=cm>#define Y  SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),FOREGROUND_RED|FOREGROUND_GREEN)</span>
+<span class=cm>#define Yb  SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),BACKGROUND_RED|BACKGROUND_GREEN|BACKGROUND_INTENSITY)</span>
+<span class=cm>#define S  SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),FOREGROUND_GREEN|FOREGROUND_BLUE)</span>
+<span class=cm>#define Sb  SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),BACKGROUND_GREEN|BACKGROUND_BLUE|BACKGROUND_INTENSITY)</span>
+<span class=cm>#define P  SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),FOREGROUND_BLUE|FOREGROUND_RED)</span>
+<span class=cm>#define Pb  SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),BACKGROUND_BLUE|BACKGROUND_RED|BACKGROUND_INTENSITY)</span>
+<span class=cm>*/</span>
+<span class=cp>#define br BACKGROUND_RED</span>
+<span class=cp>#define bg BACKGROUND_GREEN</span>
+<span class=cp>#define bb BACKGROUND_BLUE</span>
+<span class=cp>#define bi BACKGROUND_INTENSITY</span>
+<span class=cp>#define fr FOREGROUND_RED</span>
+<span class=cp>#define fg FOREGROUND_GREEN</span>
+<span class=cp>#define fb FOREGROUND_BLUE</span>
+<span class=cp>#define fi FOREGROUND_INTENSITY</span>
+
+<span class=k>using</span> <span class=k>namespace</span> <span class=n>std</span><span class=p>;</span>
+<span class=kt>int</span> <span class=n>dx</span><span class=o>=</span><span class=mi>1</span><span class=p>,</span><span class=n>dy</span><span class=o>=</span><span class=mi>1</span><span class=p>;</span>
+<span class=kt>int</span> <span class=n>a</span><span class=p>[</span><span class=mi>101</span><span class=p>][</span><span class=mi>101</span><span class=p>];</span>
+<span class=kt>int</span> <span class=n>score</span><span class=o>=</span><span class=mi>0</span><span class=p>;</span>
+<span class=kt>void</span> <span class=nf>col</span><span class=p>(</span><span class=kt>int</span> <span class=n>co</span><span class=p>)</span>
+<span class=p>{</span>
+    <span class=n>SetConsoleTextAttribute</span><span class=p>(</span><span class=n>GetStdHandle</span><span class=p>(</span><span class=n>STD_OUTPUT_HANDLE</span><span class=p>),</span><span class=n>co</span><span class=p>);</span>
+<span class=p>}</span>
+<span class=kt>void</span> <span class=nf>gotoxy</span><span class=p>(</span><span class=kt>int</span> <span class=n>x</span><span class=p>,</span> <span class=kt>int</span> <span class=n>y</span><span class=p>)</span> <span class=p>{</span>
+    <span class=n>COORD</span> <span class=n>pos</span> <span class=o>=</span> <span class=p>{</span><span class=n>x</span><span class=p>,</span><span class=n>y</span><span class=p>};</span>
+    <span class=n>HANDLE</span> <span class=n>hOut</span> <span class=o>=</span> <span class=n>GetStdHandle</span><span class=p>(</span><span class=n>STD_OUTPUT_HANDLE</span><span class=p>);</span>
+    <span class=n>SetConsoleCursorPosition</span><span class=p>(</span><span class=n>hOut</span><span class=p>,</span> <span class=n>pos</span><span class=p>);</span>
+<span class=p>}</span>
+<span class=kt>void</span> <span class=nf>HideCursor</span><span class=p>()</span>
+<span class=p>{</span>
+	<span class=n>CONSOLE_CURSOR_INFO</span> <span class=n>cursor_info</span> <span class=o>=</span> <span class=p>{</span><span class=mi>1</span><span class=p>,</span> <span class=mi>0</span><span class=p>};</span>
+	<span class=n>SetConsoleCursorInfo</span><span class=p>(</span><span class=n>GetStdHandle</span><span class=p>(</span><span class=n>STD_OUTPUT_HANDLE</span><span class=p>),</span> <span class=o>&amp;</span><span class=n>cursor_info</span><span class=p>);</span>
+<span class=p>}</span>
+<span class=kt>bool</span> <span class=nf>check</span><span class=p>(</span><span class=kt>char</span> <span class=n>c</span><span class=p>){</span>
+	<span class=k>return</span> <span class=n>KEY_DOWN</span><span class=p>(</span><span class=n>c</span><span class=p>);</span>
+<span class=p>}</span>
+<span class=kt>void</span> <span class=nf>prin</span><span class=p>(</span><span class=kt>int</span> <span class=n>num</span><span class=p>,</span><span class=kt>bool</span> <span class=n>choice</span><span class=p>)</span>
+<span class=p>{</span>
+    <span class=n>col</span><span class=p>(</span><span class=n>fr</span><span class=o>+</span><span class=n>fg</span><span class=o>+</span><span class=n>fb</span><span class=p>);</span>
+    <span class=k>switch</span> <span class=p>(</span><span class=n>num</span><span class=p>)</span>
+    <span class=p>{</span>
+        <span class=k>case</span> <span class=mi>0</span><span class=o>:</span>
+        <span class=p>{</span>
+            <span class=n>col</span><span class=p>(</span><span class=n>fr</span><span class=o>+</span><span class=n>fg</span><span class=o>+</span><span class=n>fb</span><span class=p>);</span>
+            <span class=k>break</span><span class=p>;</span>
+        <span class=p>}</span>
+        <span class=k>case</span> <span class=mi>1</span><span class=o>:</span>
+        <span class=p>{</span>
+            <span class=n>col</span><span class=p>(</span><span class=n>br</span><span class=o>+</span><span class=n>bi</span><span class=p>);</span>
+            <span class=k>break</span><span class=p>;</span>
+        <span class=p>}</span>
+        <span class=k>case</span> <span class=mi>2</span><span class=o>:</span>
+        <span class=p>{</span>
+            <span class=n>col</span><span class=p>(</span><span class=n>bg</span><span class=o>+</span><span class=n>bi</span><span class=p>);</span>
+            <span class=k>break</span><span class=p>;</span>
+        <span class=p>}</span>
+        <span class=k>case</span> <span class=mi>3</span><span class=o>:</span>
+        <span class=p>{</span>
+            <span class=n>col</span><span class=p>(</span><span class=n>bb</span><span class=o>+</span><span class=n>bi</span><span class=p>);</span>
+            <span class=k>break</span><span class=p>;</span>
+        <span class=p>}</span>
+    <span class=p>}</span>
+    <span class=k>if</span> <span class=p>(</span><span class=n>choice</span><span class=p>)</span> <span class=n>cout</span><span class=o>&lt;&lt;</span><span class=s>&quot;**&quot;</span><span class=p>;</span>
+    <span class=k>else</span> <span class=n>cout</span><span class=o>&lt;&lt;</span><span class=s>&quot;  &quot;</span><span class=p>;</span>
+<span class=p>}</span>
+<span class=kt>bool</span> <span class=n>dfs_map</span><span class=p>[</span><span class=mi>101</span><span class=p>][</span><span class=mi>101</span><span class=p>];</span>
+<span class=cp>#define n 10</span>
+<span class=kt>int</span> <span class=nf>dfs</span><span class=p>(</span><span class=kt>int</span> <span class=n>x</span><span class=p>,</span><span class=kt>int</span> <span class=n>y</span><span class=p>,</span><span class=kt>int</span> <span class=n>color</span><span class=p>)</span>
+<span class=p>{</span>
+    <span class=k>if</span> <span class=p>(</span><span class=n>color</span><span class=o>==</span><span class=mi>0</span><span class=p>)</span> <span class=k>return</span> <span class=mi>0</span><span class=p>;</span>
+    <span class=k>if</span> <span class=p>(</span><span class=n>x</span><span class=o>&lt;</span><span class=mi>1</span><span class=o>||</span><span class=n>x</span><span class=o>&gt;</span><span class=n>n</span><span class=o>||</span><span class=n>y</span><span class=o>&lt;</span><span class=mi>1</span><span class=o>||</span><span class=n>y</span><span class=o>&gt;</span><span class=n>n</span><span class=p>)</span> <span class=k>return</span> <span class=mi>0</span><span class=p>;</span>
+    <span class=k>if</span> <span class=p>(</span><span class=n>dfs_map</span><span class=p>[</span><span class=n>x</span><span class=p>][</span><span class=n>y</span><span class=p>])</span> <span class=k>return</span> <span class=mi>0</span><span class=p>;</span>
+    <span class=k>if</span> <span class=p>(</span><span class=n>a</span><span class=p>[</span><span class=n>x</span><span class=p>][</span><span class=n>y</span><span class=p>]</span><span class=o>!=</span><span class=mi>0</span><span class=o>&amp;&amp;</span><span class=n>a</span><span class=p>[</span><span class=n>x</span><span class=p>][</span><span class=n>y</span><span class=p>]</span><span class=o>!=</span><span class=n>color</span><span class=p>)</span> <span class=k>return</span> <span class=mi>0</span><span class=p>;</span>
+    <span class=n>dfs_map</span><span class=p>[</span><span class=n>x</span><span class=p>][</span><span class=n>y</span><span class=p>]</span><span class=o>=</span><span class=mi>1</span><span class=p>;</span>
+    <span class=k>if</span> <span class=p>(</span><span class=n>a</span><span class=p>[</span><span class=n>x</span><span class=p>][</span><span class=n>y</span><span class=p>]</span><span class=o>==</span><span class=mi>0</span><span class=p>)</span> <span class=k>return</span> <span class=n>dfs</span><span class=p>(</span><span class=n>x</span><span class=o>-</span><span class=mi>1</span><span class=p>,</span><span class=n>y</span><span class=p>,</span><span class=n>color</span><span class=p>)</span><span class=o>+</span><span class=n>dfs</span><span class=p>(</span><span class=n>x</span><span class=o>+</span><span class=mi>1</span><span class=p>,</span><span class=n>y</span><span class=p>,</span><span class=n>color</span><span class=p>)</span><span class=o>+</span><span class=n>dfs</span><span class=p>(</span><span class=n>x</span><span class=p>,</span><span class=n>y</span><span class=o>+</span><span class=mi>1</span><span class=p>,</span><span class=n>color</span><span class=p>)</span><span class=o>+</span><span class=n>dfs</span><span class=p>(</span><span class=n>x</span><span class=p>,</span><span class=n>y</span><span class=o>-</span><span class=mi>1</span><span class=p>,</span><span class=n>color</span><span class=p>);</span>
+    <span class=k>else</span>
+    <span class=p>{</span>
+        <span class=n>a</span><span class=p>[</span><span class=n>x</span><span class=p>][</span><span class=n>y</span><span class=p>]</span><span class=o>=</span><span class=mi>0</span><span class=p>;</span>
+        <span class=k>return</span> <span class=mi>1</span><span class=o>+</span><span class=n>dfs</span><span class=p>(</span><span class=n>x</span><span class=o>-</span><span class=mi>1</span><span class=p>,</span><span class=n>y</span><span class=p>,</span><span class=n>color</span><span class=p>)</span><span class=o>+</span><span class=n>dfs</span><span class=p>(</span><span class=n>x</span><span class=o>+</span><span class=mi>1</span><span class=p>,</span><span class=n>y</span><span class=p>,</span><span class=n>color</span><span class=p>)</span><span class=o>+</span><span class=n>dfs</span><span class=p>(</span><span class=n>x</span><span class=p>,</span><span class=n>y</span><span class=o>+</span><span class=mi>1</span><span class=p>,</span><span class=n>color</span><span class=p>)</span><span class=o>+</span><span class=n>dfs</span><span class=p>(</span><span class=n>x</span><span class=p>,</span><span class=n>y</span><span class=o>-</span><span class=mi>1</span><span class=p>,</span><span class=n>color</span><span class=p>);</span>
+    <span class=p>}</span>
+<span class=p>}</span>
+<span class=kt>bool</span> <span class=nf>wron</span><span class=p>()</span>
+<span class=p>{</span>
+    <span class=k>for</span> <span class=p>(</span><span class=kt>int</span> <span class=n>i</span><span class=o>=</span><span class=mi>1</span><span class=p>;</span><span class=n>i</span><span class=o>&lt;=</span><span class=n>n</span><span class=p>;</span><span class=n>i</span><span class=o>++</span><span class=p>)</span>
+        <span class=k>for</span> <span class=p>(</span><span class=kt>int</span> <span class=n>j</span><span class=o>=</span><span class=mi>1</span><span class=p>;</span><span class=n>j</span><span class=o>&lt;=</span><span class=n>n</span><span class=p>;</span><span class=n>j</span><span class=o>++</span><span class=p>)</span>
+            <span class=k>if</span> <span class=p>(</span><span class=n>a</span><span class=p>[</span><span class=n>i</span><span class=p>][</span><span class=n>j</span><span class=p>]</span><span class=o>!=</span><span class=mi>0</span><span class=p>)</span> <span class=k>return</span> <span class=mi>1</span><span class=p>;</span>
+    <span class=k>return</span> <span class=mi>0</span><span class=p>;</span>
+<span class=p>}</span>
+<span class=kt>int</span> <span class=nf>main</span><span class=p>()</span>
+<span class=p>{</span>
+    <span class=n>HideCursor</span><span class=p>();</span>
+    <span class=n>srand</span><span class=p>((</span><span class=kt>unsigned</span><span class=p>)</span><span class=n>time</span><span class=p>(</span><span class=nb>NULL</span><span class=p>));</span>
+    <span class=k>for</span> <span class=p>(</span><span class=kt>int</span> <span class=n>i</span><span class=o>=</span><span class=mi>1</span><span class=p>;</span><span class=n>i</span><span class=o>&lt;=</span><span class=n>n</span><span class=p>;</span><span class=n>i</span><span class=o>++</span><span class=p>)</span>
+    <span class=p>{</span>
+        <span class=k>for</span> <span class=p>(</span><span class=kt>int</span> <span class=n>j</span><span class=o>=</span><span class=mi>1</span><span class=p>;</span><span class=n>j</span><span class=o>&lt;=</span><span class=n>n</span><span class=p>;</span><span class=n>j</span><span class=o>++</span><span class=p>)</span>
+            <span class=n>a</span><span class=p>[</span><span class=n>i</span><span class=p>][</span><span class=n>j</span><span class=p>]</span><span class=o>=</span><span class=n>rand</span><span class=p>()</span><span class=o>%</span><span class=mi>3</span><span class=o>+</span><span class=mi>1</span><span class=p>,</span><span class=n>prin</span><span class=p>(</span><span class=n>a</span><span class=p>[</span><span class=n>i</span><span class=p>][</span><span class=n>j</span><span class=p>],</span><span class=mi>0</span><span class=p>);</span><span class=c1>//cout&lt;&lt;a[i][j];</span>
+        <span class=n>col</span><span class=p>(</span><span class=mi>0</span><span class=p>),</span><span class=n>cout</span><span class=o>&lt;&lt;</span><span class=n>endl</span><span class=p>;</span>
+    <span class=p>}</span>
+    <span class=k>while</span> <span class=p>(</span><span class=n>wron</span><span class=p>())</span>
+    <span class=p>{</span>
+        <span class=kt>int</span> <span class=n>tmp</span><span class=o>=</span><span class=mi>0</span><span class=p>;</span>
+        <span class=n>memset</span><span class=p>(</span><span class=n>dfs_map</span><span class=p>,</span><span class=mi>0</span><span class=p>,</span><span class=k>sizeof</span><span class=p>(</span><span class=n>dfs_map</span><span class=p>));</span>
+        <span class=n>gotoxy</span><span class=p>(</span><span class=mi>0</span><span class=p>,</span><span class=mi>0</span><span class=p>);</span>
+        <span class=k>for</span> <span class=p>(</span><span class=kt>int</span> <span class=n>i</span><span class=o>=</span><span class=mi>1</span><span class=p>;</span><span class=n>i</span><span class=o>&lt;=</span><span class=n>n</span><span class=p>;</span><span class=n>i</span><span class=o>++</span><span class=p>)</span>
+        <span class=p>{</span>
+            <span class=k>for</span> <span class=p>(</span><span class=kt>int</span> <span class=n>j</span><span class=o>=</span><span class=mi>1</span><span class=p>;</span><span class=n>j</span><span class=o>&lt;=</span><span class=n>n</span><span class=p>;</span><span class=n>j</span><span class=o>++</span><span class=p>)</span>
+                <span class=k>if</span> <span class=p>(</span><span class=n>i</span><span class=o>!=</span><span class=n>dx</span><span class=o>||</span><span class=n>j</span><span class=o>!=</span><span class=n>dy</span><span class=p>)</span> <span class=n>prin</span><span class=p>(</span><span class=n>a</span><span class=p>[</span><span class=n>i</span><span class=p>][</span><span class=n>j</span><span class=p>],</span><span class=mi>0</span><span class=p>);</span><span class=c1>//cout&lt;&lt;a[i][j];</span>
+                <span class=k>else</span> <span class=n>prin</span><span class=p>(</span><span class=n>a</span><span class=p>[</span><span class=n>i</span><span class=p>][</span><span class=n>j</span><span class=p>],</span><span class=mi>1</span><span class=p>);</span>
+            <span class=n>col</span><span class=p>(</span><span class=mi>0</span><span class=p>),</span><span class=n>cout</span><span class=o>&lt;&lt;</span><span class=n>endl</span><span class=p>;</span>
+        <span class=p>}</span>
+        <span class=n>gotoxy</span><span class=p>(</span><span class=mi>30</span><span class=p>,</span><span class=mi>0</span><span class=p>);</span>
+        <span class=n>col</span><span class=p>(</span><span class=n>fr</span><span class=o>+</span><span class=n>fg</span><span class=o>+</span><span class=n>fb</span><span class=p>),</span><span class=n>cout</span> <span class=o>&lt;&lt;</span> <span class=s>&quot;dx:&quot;</span> <span class=o>&lt;&lt;</span> <span class=n>dx</span> <span class=o>&lt;&lt;</span> <span class=s>&quot; dy:&quot;</span> <span class=o>&lt;&lt;</span> <span class=n>dy</span> <span class=o>&lt;&lt;</span> <span class=s>&quot; score:&quot;</span> <span class=o>&lt;&lt;</span> <span class=n>score</span> <span class=o>&lt;&lt;</span> <span class=s>&quot;         &quot;</span><span class=p>;</span>
+        <span class=n>Sleep</span><span class=p>(</span><span class=mi>50</span><span class=p>);</span>
+        <span class=k>if</span> <span class=p>(</span><span class=n>check</span><span class=p>(</span><span class=n>VK_UP</span><span class=p>))</span> <span class=n>dx</span><span class=o>=</span><span class=n>max</span><span class=p>(</span><span class=n>dx</span><span class=o>-</span><span class=mi>1</span><span class=p>,</span><span class=mi>1</span><span class=p>);</span>
+        <span class=k>if</span> <span class=p>(</span><span class=n>check</span><span class=p>(</span><span class=n>VK_LEFT</span><span class=p>))</span> <span class=n>dy</span><span class=o>=</span><span class=n>max</span><span class=p>(</span><span class=n>dy</span><span class=o>-</span><span class=mi>1</span><span class=p>,</span><span class=mi>1</span><span class=p>);</span>
+        <span class=k>if</span> <span class=p>(</span><span class=n>check</span><span class=p>(</span><span class=n>VK_DOWN</span><span class=p>))</span> <span class=n>dx</span><span class=o>=</span><span class=n>min</span><span class=p>(</span><span class=n>dx</span><span class=o>+</span><span class=mi>1</span><span class=p>,</span><span class=n>n</span><span class=p>);</span>
+        <span class=k>if</span> <span class=p>(</span><span class=n>check</span><span class=p>(</span><span class=n>VK_RIGHT</span><span class=p>))</span> <span class=n>dy</span><span class=o>=</span><span class=n>min</span><span class=p>(</span><span class=n>dy</span><span class=o>+</span><span class=mi>1</span><span class=p>,</span><span class=n>n</span><span class=p>);</span>
+        <span class=k>if</span> <span class=p>(</span><span class=n>check</span><span class=p>(</span><span class=n>VK_RETURN</span><span class=p>))</span> <span class=n>tmp</span><span class=o>=</span><span class=n>dfs</span><span class=p>(</span><span class=n>dx</span><span class=p>,</span><span class=n>dy</span><span class=p>,</span><span class=n>a</span><span class=p>[</span><span class=n>dx</span><span class=p>][</span><span class=n>dy</span><span class=p>]),</span><span class=n>score</span><span class=o>+=</span><span class=n>tmp</span><span class=o>*</span><span class=p>(</span><span class=n>tmp</span><span class=o>+</span><span class=mi>1</span><span class=p>);</span>
+    <span class=p>}</span>
+    <span class=n>gotoxy</span><span class=p>(</span><span class=mi>30</span><span class=p>,</span><span class=mi>0</span><span class=p>);</span>
+    <span class=n>col</span><span class=p>(</span><span class=n>fr</span><span class=o>+</span><span class=n>fg</span><span class=o>+</span><span class=n>fb</span><span class=p>),</span><span class=n>cout</span> <span class=o>&lt;&lt;</span> <span class=s>&quot;                                                                  &quot;</span><span class=p>;</span>
+    <span class=n>gotoxy</span><span class=p>(</span><span class=mi>10</span><span class=p>,</span><span class=mi>10</span><span class=p>);</span><span class=n>cout</span> <span class=o>&lt;&lt;</span> <span class=s>&quot;score:&quot;</span> <span class=o>&lt;&lt;</span> <span class=n>score</span><span class=p>;</span>
+    <span class=n>Sleep</span><span class=p>(</span><span class=mi>10000</span><span class=p>);</span>
+<span class=p>}</span>
+</pre> </div> </td> </tr> </table> </div> <a href=https://paste.ubuntu.com/25841126/plain/ class=pturl>Download as text</a> </div> </div> </div> </div></body></html>
